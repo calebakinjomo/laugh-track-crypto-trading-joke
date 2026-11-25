@@ -1,6 +1,9 @@
 """Write one crypto-trading joke to $MAKEFUN_OUTPUT_DIR/entry.txt.
 
 Reads no environment variable except MAKEFUN_OUTPUT_DIR (default /output).
+The output directory is created first if it does not exist, so the entry
+lands even on a fresh sandbox. The entry itself is fixed: a single
+119-character joke about buying the dip, written verbatim plus a newline.
 """
 
 import os
@@ -11,6 +14,8 @@ LINE = (
 )
 
 OUTPUT_DIR = os.environ.get("MAKEFUN_OUTPUT_DIR", "/output")
+
+os.makedirs(OUTPUT_DIR, exist_ok=True)
 
 with open(os.path.join(OUTPUT_DIR, "entry.txt"), "w", encoding="utf-8") as f:
     f.write(LINE + "\n")
