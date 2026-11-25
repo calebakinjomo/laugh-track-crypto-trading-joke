@@ -13,9 +13,12 @@ LINE = (
     "— my portfolio is now a Russian doll of bad decisions."
 )
 
+if len(LINE) != 119 or "\n" in LINE or "\r" in LINE:
+    raise ValueError("entry must be a single 119-character line")
+
 OUTPUT_DIR = os.environ.get("MAKEFUN_OUTPUT_DIR", "/output")
 
 os.makedirs(OUTPUT_DIR, exist_ok=True)
 
-with open(os.path.join(OUTPUT_DIR, "entry.txt"), "w", encoding="utf-8") as f:
+with open(os.path.join(OUTPUT_DIR, "entry.txt"), "w", encoding="utf-8", newline="\n") as f:
     f.write(LINE + "\n")
